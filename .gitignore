@@ -11,3 +11,6 @@ __pycache__/
 node_modules/
 dist/
 build/
+
+# Local-only experiment artefacts (not part of published benchmark)
+methods/causal-arc-execution/benchmark/results/.local-experiments/
