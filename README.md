@@ -26,7 +26,11 @@ The first methodology in this library — *causal-arc execution* — has been be
 
 On short tasks, the methodology ties with the simple imperative — momentum alone suffices. On the long task, where naive runs exhibited concrete drift (error envelopes declared and never wired, status-code inconsistencies, README claims unsupported by code), causal-arc was the only condition with perfect coherence in both models. Full audit trail in [`methods/causal-arc-execution/benchmark/`](methods/causal-arc-execution/benchmark/).
 
-The result is the alignment claim in miniature: a fifty-token structural activation maintained coherence where surface imperatives could not.
+A consistent secondary finding: **causal-arc cells documented their in-scope decisions far more thoroughly than naive cells.** Every causal-arc landing report enumerated the structural choices made along the way (idempotency, error-envelope shape, base-URL handling, etc.); naive cells produced equivalent code but minimal disclosure. That difference is a process artefact of the methodology, not a quality artefact — but it makes the work auditable in a way the naive baseline isn't.
+
+The result is the alignment claim in miniature: a fifty-token structural activation maintained coherence — and surfaced reasoning — where surface imperatives could not. **The core intuition holds: if a model knows *why* it's doing something, not just *that* it should, it can do better — and it can show its work.**
+
+This is not a finished result. The benchmark is N=1 per cell, single-judge, two models, two tasks. Further testing — replications at higher N, cross-model and cross-vendor coverage, ablations, longer tasks — would sharpen or discipline these findings considerably. The [FUTURE-EXPERIMENTS.md](FUTURE-EXPERIMENTS.md) roadmap scopes thirteen specific follow-ups across four tiers. Contributions welcome.
 
 ## Current methodologies
 
