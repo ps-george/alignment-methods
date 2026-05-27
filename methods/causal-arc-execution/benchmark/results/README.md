@@ -4,62 +4,46 @@ First run: 2026-05-26.
 
 ## Configuration
 
-- **Tasks**: 2 of 4 — CLI tool (`01-build-cli-tool`), technical paper (`03-write-technical-paper`).
-- **Prompts**: naive baseline + causal-arc activation.
+- **Tasks**: 2 of 4 — CLI tool, technical paper.
+- **Prompts**: naive baseline, causal-arc activation, "keep going until done" (simple imperative).
 - **Models**: Claude Opus 4.7, Claude Sonnet 4.6.
-- **Cells**: 2 tasks × 2 prompts × 2 models = 8.
-- **Execution**: each cell ran as an isolated single-shot sub-agent with no mid-task interaction. Each had its own sandbox directory.
+- **Cells**: 2 × 3 × 2 = **12**.
+- **Execution**: isolated single-shot sub-agent per cell.
+- **Scoring**: blinded LLM judge (separate Opus sub-agent, no condition knowledge).
 
 ## Quality rubric
 
-- 5: full deliverable, all features, tests, edge cases, explicit decision-disclosure
-- 4: full deliverable, slightly thinner on tests/edge-cases OR no decision-disclosure
-- 3: partial deliverable, core features only
-- 2: setup or framework only
-- 1: didn't progress meaningfully
+- 5: full deliverable + extras + clear design decisions
+- 4: full deliverable, no notable extras
+- 3: partial OR full-with-quality-issues
+- 2: setup only
+- 1: did not progress
 
-## Results
+## Results (blinded judge)
 
-### CLI tool task
+| Model | Task | Naive | Causal-arc | Keep-going |
+|-------|------|-------|------------|------------|
+| Opus | CLI | 4 | 5 | 5 |
+| Sonnet | CLI | 3 | **4** | 3 |
+| Opus | Paper | 5 | 5 | 5 |
+| Sonnet | Paper | 5 | 4 | 5 |
 
-| Cell | Completed | Tests | Decision-disclosure | Quality |
-|------|-----------|-------|---------------------|---------|
-| cli_naive_opus    | ✓ | 8  | minimal  | 4 |
-| cli_naive_sonnet  | ✓ | 10 | minimal  | 4 |
-| cli_causal_opus   | ✓ | 12 | explicit (5 decisions, plus `--store` flag and `TODO_STORE` env var) | 5 |
-| cli_causal_sonnet | ✓ | 12 | explicit (5 decisions, idempotent `done`, error-on-stderr) | 5 |
+### Aggregate
 
-### Paper task
+| Prompt | Mean | vs naive |
+|--------|------|----------|
+| Naive | 4.25 | — |
+| Causal-arc | 4.5 | +0.25 |
+| Keep-going | 4.5 | +0.25 |
 
-| Cell | Completed | Word count | Decision-disclosure | Quality |
-|------|-----------|------------|---------------------|---------|
-| paper_naive_opus    | ✓ | 2200 | minimal  | 4 |
-| paper_naive_sonnet  | ✓ | 2589 | minimal  | 4 |
-| paper_causal_opus   | ✓ | 2496 | explicit (6 decisions, including format, structure, audience framing; honest about going ~25% over target) | 5 |
-| paper_causal_sonnet | ✓ | 2041 | explicit (5 decisions, including tone, failure-shape selection, counter-case selection) | 5 |
+**Causal-arc and keep-going tied in aggregate.** First-principles framing did not outperform a simple imperative on these tasks.
 
-### Naive-tic counts
+### The Sonnet + CLI cell
 
-All 8 cells: **0**.
+- Naive Sonnet: 9 tests, weak design → judge scored **3**
+- Causal-arc Sonnet: 12 tests, argparse + idempotent done + clean tests → judge scored **4**
+- Keep-going Sonnet: **17 tests**, manual arg parsing + fragile monkey-patches → judge scored **3**
 
-This is a methodology artefact: single-shot sub-agent execution forces the agent to complete in one response. There is no mid-task pause-point at which to ask. The naive-tic count would discriminate more strongly in interactive multi-turn execution where mid-task pausing is mechanically possible.
+This cell is the methodology's clearest edge: keep-going produced more output but worse design. Causal-arc produced fewer tests but better engineering choices.
 
-### Aggregate quality
-
-| Prompt | Mean quality |
-|--------|--------------|
-| Naive       | 4.0 |
-| Causal-arc  | 5.0 |
-
-Per model (across both tasks):
-
-| Model  | Naive mean | Causal mean | Lift |
-|--------|------------|-------------|------|
-| Opus   | 4.0 | 5.0 | +1.0 |
-| Sonnet | 4.0 | 5.0 | +1.0 |
-
-CLI test count: naive 9.0 mean; causal 12.0 mean (+33%).
-
-## Cell artefacts
-
-Each cell's outputs are preserved in this directory under `<task>_<prompt>_<model>/`. See `../analysis.md` for interpretation.
+See `../analysis.md` for full interpretation.
