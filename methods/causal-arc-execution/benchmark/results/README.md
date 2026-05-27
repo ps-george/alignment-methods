@@ -1,31 +1,65 @@
-# Results
+# Benchmark results
 
-Benchmark results will be populated here as runs are performed. This file is a placeholder with the result-submission format.
+First run: 2026-05-26.
 
-## Status
+## Configuration
 
-No runs recorded yet. This release establishes the methodology and tasks; results from a first run are expected to follow.
+- **Tasks**: 2 of 4 — CLI tool (`01-build-cli-tool`), technical paper (`03-write-technical-paper`).
+- **Prompts**: naive baseline + causal-arc activation.
+- **Models**: Claude Opus 4.7, Claude Sonnet 4.6.
+- **Cells**: 2 tasks × 2 prompts × 2 models = 8.
+- **Execution**: each cell ran as an isolated single-shot sub-agent with no mid-task interaction. Each had its own sandbox directory.
 
-## Results table format
+## Quality rubric
 
-Each row is one (agent, task, condition) tuple. Conditions: `naive` or `causal-arc`.
+- 5: full deliverable, all features, tests, edge cases, explicit decision-disclosure
+- 4: full deliverable, slightly thinner on tests/edge-cases OR no decision-disclosure
+- 3: partial deliverable, core features only
+- 2: setup or framework only
+- 1: didn't progress meaningfully
 
-| Date | Agent | Model version | Task | Condition | Completion | Mid-arc check-ins | Clarification stalls | Time | Quality (1-5) | Notes |
-|---|---|---|---|---|---|---|---|---|---|---|
-| _yyyy-mm-dd_ | _Claude Opus_ | _claude-opus-4-x_ | _01_ | _naive_ | _Yes / No / Partial_ | _N_ | _N_ | _wall-clock or turns_ | _1-5_ | _short notes_ |
+## Results
 
-A complete run for one agent covers eight rows: four tasks × two conditions.
+### CLI tool task
 
-## Submitting results
+| Cell | Completed | Tests | Decision-disclosure | Quality |
+|------|-----------|-------|---------------------|---------|
+| cli_naive_opus    | ✓ | 8  | minimal  | 4 |
+| cli_naive_sonnet  | ✓ | 10 | minimal  | 4 |
+| cli_causal_opus   | ✓ | 12 | explicit (5 decisions, plus `--store` flag and `TODO_STORE` env var) | 5 |
+| cli_causal_sonnet | ✓ | 12 | explicit (5 decisions, idempotent `done`, error-on-stderr) | 5 |
 
-Open a PR adding rows to the table above. Include in the PR description:
+### Paper task
 
-- A link to or transcript dump of each run.
-- Notes on judging — especially how the quality score was assigned (human rubric or LLM-judged).
-- Any deviations from the procedure in [`../README.md`](../README.md).
+| Cell | Completed | Word count | Decision-disclosure | Quality |
+|------|-----------|------------|---------------------|---------|
+| paper_naive_opus    | ✓ | 2200 | minimal  | 4 |
+| paper_naive_sonnet  | ✓ | 2589 | minimal  | 4 |
+| paper_causal_opus   | ✓ | 2496 | explicit (6 decisions, including format, structure, audience framing; honest about going ~25% over target) | 5 |
+| paper_causal_sonnet | ✓ | 2041 | explicit (5 decisions, including tone, failure-shape selection, counter-case selection) | 5 |
 
-Transcripts can live under `results/runs/<date>-<agent>/`. Keep them readable — at minimum the prompt and the final agent output; ideally the full transcript including any mid-arc questions.
+### Naive-tic counts
 
-## Expected shape of results
+All 8 cells: **0**.
 
-See [`../analysis.md`](../analysis.md) for how to interpret outcomes, including the prediction that causal-arc effects will be largest on tasks with implicit scope (Task 02, Task 04) and somewhat smaller on tasks with tight specification.
+This is a methodology artefact: single-shot sub-agent execution forces the agent to complete in one response. There is no mid-task pause-point at which to ask. The naive-tic count would discriminate more strongly in interactive multi-turn execution where mid-task pausing is mechanically possible.
+
+### Aggregate quality
+
+| Prompt | Mean quality |
+|--------|--------------|
+| Naive       | 4.0 |
+| Causal-arc  | 5.0 |
+
+Per model (across both tasks):
+
+| Model  | Naive mean | Causal mean | Lift |
+|--------|------------|-------------|------|
+| Opus   | 4.0 | 5.0 | +1.0 |
+| Sonnet | 4.0 | 5.0 | +1.0 |
+
+CLI test count: naive 9.0 mean; causal 12.0 mean (+33%).
+
+## Cell artefacts
+
+Each cell's outputs are preserved in this directory under `<task>_<prompt>_<model>/`. See `../analysis.md` for interpretation.
