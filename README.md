@@ -73,4 +73,4 @@ MIT. See [LICENSE](LICENSE).
 
 ## Author
 
-George Morgan
+George Punter — MEng, Electronic and Information Engineering, Imperial College London (1st Class Honours)
