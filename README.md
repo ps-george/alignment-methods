@@ -73,6 +73,6 @@ MIT. See [LICENSE](LICENSE).
 
 ## Author
 
-George Punter
-MEng Electronic and Information Engineering (1st Class), Imperial College London
-Condri · george@condri.app
+George Punter · Condri · george@condri.app
+
+<sub>MEng Electronic and Information Engineering (1st Class Honours), Imperial College London.</sub>
