@@ -1,30 +1,34 @@
 # Contributing
 
-This library accepts new methods that meet the first-principles bar described in [`philosophy.md`](philosophy.md).
+This library accepts new alignment methodologies that meet the structural bar described in [`philosophy.md`](philosophy.md).
+
+Contributors are alignment researchers and practitioners proposing disciplines that work by giving the agent first-principles understanding rather than by stacking surface rules.
 
 ## Format
 
-Each method lives at `methods/<method-name>/` and contains, at minimum:
+Each methodology lives at `methods/<method-name>/` and contains, at minimum:
 
 ```
 methods/<method-name>/
 ├── README.md            # Summary: setup, moment, integration
 ├── first-principles.md  # The structural argument (load-bearing)
 ├── practice.md          # Operational rules, derived from first-principles
-├── invocations.md       # Prompt phrases that activate the method
+├── invocations.md       # Prompt phrases that activate the methodology
 └── anti-patterns.md     # Failure modes to avoid
 ```
 
-A `benchmark/` subdirectory is encouraged but not required for an initial submission. See `methods/causal-arc-execution/benchmark/` for the template.
+A `benchmark/` subdirectory is **required** for inclusion (see below). See `methods/causal-arc-execution/benchmark/` for the template.
 
 ## The bar
 
 Before submitting, confirm:
 
-1. **There is a real failure mode.** The method addresses a behaviour you have observed degrade agent output across multiple sessions or agents, not a one-off.
+1. **The methodology aligns through understanding, not rules.** The discipline must work by changing the agent's model of the situation. If the value depends on the agent obeying a prohibition without seeing why, it is behavioural alignment and belongs elsewhere.
 2. **The argument is structural.** Your first-principles document explains *why* the discipline matters from the shape of the situation, not from authority or "best practice".
-3. **The practice follows.** The rules in `practice.md` are derivable from `first-principles.md`. If a reader internalised only the first-principles content, the rules would feel like consequences, not surprises.
-4. **No mysticism.** The method works because of something legible. If you find yourself unable to explain why it works, it isn't ready.
+3. **The practice follows.** The rules in `practice.md` are derivable from `first-principles.md`. If a reader internalised only the first-principles content, the rules would feel like consequences rather than surprises.
+4. **There is empirical evidence.** Include a benchmark with at least: a naive baseline (no methodology activation), the methodology, and at least one comparison condition (e.g., a simple behavioural imperative aimed at the same failure mode). The methodology does not need to dominate everywhere; it needs to be evaluated honestly against alternatives.
+5. **Honest framing throughout.** Report ties as ties. Report cases where the methodology does not help. Do not oversell.
+6. **No mysticism.** The methodology works because of something legible. If you cannot explain why, it isn't ready.
 
 ## Style
 
@@ -35,9 +39,9 @@ Before submitting, confirm:
 ## Process
 
 1. Fork, branch.
-2. Add your method directory with the files above.
-3. Add a row to the methods table in the top-level `README.md`.
-4. Open a PR. Expect feedback focused on whether the first-principles content carries the weight.
+2. Add your methodology directory with the files above, including the benchmark.
+3. Add a row to the methodologies table in the top-level `README.md`.
+4. Open a PR. Expect feedback focused on whether the first-principles content carries the weight and whether the benchmark is honest.
 
 ## License
 

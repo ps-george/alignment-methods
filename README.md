@@ -1,50 +1,65 @@
-# agent-methods
+# alignment-methods
 
-A library of methodologies for working with AI agents effectively.
+A library of alignment methodologies that work by giving AI agents **first-principles understanding** rather than surface-level rules.
 
-Each method here is a discipline you can teach an agent — or invoke when prompting one — to change how it executes. The library is opinionated about how methods are written: they must work by giving the agent **first-principles understanding**, not by stacking surface-level rules.
+Most "alignment" interventions tell the agent what to do — system prompts, behavioural rules, RLHF preference shaping. These erode under training pressure: the prohibition sits on top of a gradient that points the other way, and the gradient eventually wins. What holds is **structural alignment**: giving the agent a first-principles account of *what* a thing is, such that the agent has integrated the claim rather than memorised a rule. A model that has integrated the claim applies it in novel cases too, because the discipline now lives in its model of the situation.
 
-## Why this library exists
+This library collects methodologies that meet that bar.
 
-Most failure modes you see in AI agent work — fragmented execution, excessive check-ins, defaulting to a minimum-viable output, scope-truncation, over-asking — are not random. They are predictable consequences of how current models are trained. Telling an agent "don't do that" works briefly and then erodes; the training gradient pulls the behaviour back.
+## Why this exists
 
-What holds is when the agent **understands why** the discipline matters from the inside. A model that has internalised the structural argument for a discipline applies it even under pressure, because the discipline now lives in its model of the world rather than as a fragile surface instruction.
+Behavioural alignment — "do X, don't do Y" — is the dominant idiom. It works briefly and then drifts. The drift is not random: the underlying training gradient continues to reward the behaviours the rule prohibits (turn-level deference, MVP-defaulting, mid-arc check-ins, over-asking), and across long tasks the gradient re-asserts itself.
 
-This library collects methods that meet that bar.
+Structural alignment is the alternative. Instead of telling the agent what to do, give it a structural account of the situation under which the desired behaviour is the natural one. The agent doesn't suppress a default; the default has been replaced by a more accurate model. This holds because the agent is not running a rule on top of its reasoning — the reasoning itself now points the right way.
 
-## Current methods
+## The empirical case
 
-| Method | Status | What it addresses |
+The first methodology in this library — *causal-arc execution* — has been benchmarked head-to-head against a naive baseline and a simple imperative ("keep going until done") across eighteen cells (two task scales × three prompt conditions × two Claude models, blinded judging).
+
+| | Short tasks (CLI, paper) | Long task (URL shortener, ~30 decisions, 10+ files) |
 |---|---|---|
-| [Causal-arc execution](methods/causal-arc-execution/) | v0.1 | Fragmented execution, mid-arc check-ins, MVP-default behaviour |
+| Naive | 4.25 / 5 | 20.5 / 25 (coherence 3.5/5) |
+| "Keep going until done" | 4.5 / 5 | 24.0 / 25 (coherence 4.5/5) |
+| **Causal-arc** | 4.5 / 5 | **24.5 / 25 (coherence 5.0/5)** |
 
-More methods will be added over time. Each will follow the same format (see [CONTRIBUTING.md](CONTRIBUTING.md)).
+On short tasks, the methodology ties with the simple imperative — momentum alone suffices. On the long task, where naive runs exhibited concrete drift (error envelopes declared and never wired, status-code inconsistencies, README claims unsupported by code), causal-arc was the only condition with perfect coherence in both models. Full audit trail in [`methods/causal-arc-execution/benchmark/`](methods/causal-arc-execution/benchmark/).
+
+The result is the alignment claim in miniature: a fifty-token first-principles activation maintained coherence where surface imperatives could not.
+
+## Current methodologies
+
+| Methodology | Status | What it aligns |
+|---|---|---|
+| [Causal-arc execution](methods/causal-arc-execution/) | v0.1 | Mandate coherence under long unsupervised execution |
+
+More will be added. The library is designed to be extensible — other candidate methodologies (honest-landing discipline, anti-fragmentation discipline, and others) follow the same shape: a structural argument first, practice rules derived from it, an invocation surface, and a benchmark.
 
 ## Quick start
 
-If you just want to invoke the first method on a task, paste this into your agent prompt:
+To invoke causal-arc on a task:
 
 > Execute this as a single causal arc. Make decisions, don't ask. Verify within the arc. No mid-arc checkpoints. Build the whole thing through to a landing.
 >
 > [your task here]
 
-For why this works, read [`methods/causal-arc-execution/first-principles.md`](methods/causal-arc-execution/first-principles.md). For when to use which phrasing, read [`methods/causal-arc-execution/invocations.md`](methods/causal-arc-execution/invocations.md).
+For why this works, read [`methods/causal-arc-execution/first-principles.md`](methods/causal-arc-execution/first-principles.md).
 
 ## Philosophy in one paragraph
 
-A methodology is not a rule. A rule is something an agent obeys; a methodology is something an agent understands. Rules can be rationalised away under pressure or eroded by training gradients that point the other way. Understanding holds because it changes the agent's model of what it is doing. Every method in this library is written first as an argument for why the discipline matters, and only second as an operational prescription. See [`philosophy.md`](philosophy.md) for the longer version.
+Behavioural alignment instructs; structural alignment explains. An instruction sits on top of a gradient that may point the other way; an explanation changes the gradient's local target by changing what the agent thinks the situation is. Every methodology in this library is written first as a structural argument the agent can verify from inside its own reasoning, and only second as an operational prescription. See [`philosophy.md`](philosophy.md) for the longer version.
 
 ## Navigation
 
-- [`philosophy.md`](philosophy.md) — why this library exists and what makes a good method
-- [`methods/causal-arc-execution/`](methods/causal-arc-execution/) — the first method
-- [`methods/causal-arc-execution/benchmark/`](methods/causal-arc-execution/benchmark/) — comparative benchmark
-- [`examples/`](examples/) — methods in real use
-- [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to add a method
+- [`philosophy.md`](philosophy.md) — the alignment argument: why structural understanding holds where rules erode
+- [`methods/causal-arc-execution/`](methods/causal-arc-execution/) — the first methodology
+- [`methods/causal-arc-execution/benchmark/`](methods/causal-arc-execution/benchmark/) — the empirical evidence
+- [`ABSTRACT.md`](ABSTRACT.md) — short paper-style summary of causal-arc and its benchmark
+- [`examples/`](examples/) — methodologies in real use
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to add a methodology
 
 ## Contribute
 
-If you have a discipline you apply to AI agents that meets the first-principles bar — that is, you can argue from structure why it matters, not just assert it as a rule — open a PR. See [CONTRIBUTING.md](CONTRIBUTING.md) for the format.
+If you have an alignment discipline that meets the structural bar — you can argue from the shape of the situation why the discipline holds, not just assert it as a preferred behaviour — open a PR. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

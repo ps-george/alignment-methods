@@ -1,6 +1,6 @@
 # Invocations
 
-Short phrases you can paste into a prompt to activate causal-arc execution on a task. Each phrase emphasises a slightly different facet; choose based on which failure mode you most expect from the agent on this task.
+Short phrases you can paste into a prompt to activate the causal-arc alignment methodology on a task. The phrases below are activation surfaces, not the methodology itself — they work by pointing the agent at the first-principles account, not by issuing a behavioural rule. Each phrase emphasises a slightly different facet; choose based on which failure mode you most expect from the agent on this task.
 
 | Phrase | When to use |
 |---|---|

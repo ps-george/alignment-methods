@@ -1,6 +1,6 @@
 # Anti-Patterns
 
-Common failure modes the discipline is designed to prevent. Each one is named, briefly described, and elaborated so you can recognise it in agent output and correct it.
+The misalignment shapes the causal-arc methodology is designed to prevent. Each is a way the agent's default training equilibrium re-asserts itself against the user's actual intention; each is named, briefly described, and elaborated so you can recognise it in agent output and correct it.
 
 ---
 

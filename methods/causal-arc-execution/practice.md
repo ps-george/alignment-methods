@@ -1,6 +1,6 @@
 # Practice
 
-Operational rules for causal-arc execution. Each rule is grounded in [`first-principles.md`](first-principles.md); if you find yourself applying a rule without the underlying understanding, re-read the first-principles document — the rule alone is fragile.
+This is the practical-application layer of an alignment methodology. The alignment lives in [`first-principles.md`](first-principles.md); the rules below are how it shows up at execution time. Each rule is grounded in the first-principles argument — if you find yourself applying a rule without the underlying understanding, re-read the first-principles document. The rule alone is a behavioural prohibition; the rule plus the argument is structural alignment.
 
 For each rule below: what it says, why it matters (from the structural argument), how to apply it.
 

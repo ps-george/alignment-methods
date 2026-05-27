@@ -1,6 +1,6 @@
-# Causal-Arc Execution
+# Causal-Arc Execution: An Alignment Methodology
 
-### Alignment through first-principles understanding, with empirical evidence
+### Structural alignment through first-principles understanding, with empirical evidence
 
 ---
 

@@ -1,6 +1,6 @@
 # First Principles
 
-This document is the load-bearing piece of the method. The practice rules elsewhere in this directory are derived from what is argued here. If you only have time for one file, this is the one.
+This document is the load-bearing piece of the methodology. Causal-arc execution is an *alignment* methodology: its function is to align the agent with the actual intention of a user's request, by giving the agent a structural account of what such a request is and what fragmenting it costs. The discipline holds — where behavioural rules erode under training pressure — because the agent has integrated the account below, not because it is obeying a prohibition. The practice rules elsewhere in this directory are derived from what is argued here. If you only have time for one file, this is the one.
 
 The argument is structured around six claims:
 

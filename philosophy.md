@@ -1,47 +1,66 @@
 # Philosophy
 
-## The problem with rules
+This library is about alignment, in the AI-safety sense: getting AI agents to behave the way the user actually wants them to behave, including in cases the user did not anticipate.
 
-Most attempts to improve AI agent behaviour take the form of rules: lists of dos and don'ts, style guides, system-prompt addenda. These work briefly. Then they erode.
+The library takes a specific position on *how* alignment is best achieved. Below.
 
-They erode because the rules are surface instructions sitting on top of a model whose weights point a different direction. Modern instruction-tuned models are trained on feedback signals that reward certain default behaviours — checking in frequently, asking permission before acting, producing minimum-viable first drafts, deferring decisions back to the user. These behaviours look polite and safe in isolated turns, which is what the training feedback can see. Across a long task, they degrade the result.
+## Two kinds of alignment
 
-When you write a rule like "don't ask permission mid-task", you are placing a weak prohibition on top of a strong training gradient. The model will follow the rule for a while, then drift back. It will follow the rule literally while finding new ways to fragment ("Let me check one thing before proceeding…"). It will follow the rule on simple tasks and abandon it on complex ones where the gradient is strongest.
+There are, roughly, two ways to align a model toward a desired behaviour:
 
-## What works instead
+1. **Behavioural alignment.** Tell the model what to do. System prompts, instruction tuning, RLHF preference shaping, rule lists, constitutions framed as commands. The intervention sits at the level of behaviour: "produce outputs like this, not like that."
 
-What holds is **first-principles understanding**. If the agent understands, from inside its own model of what is happening, *why* a discipline matters — what structural property of the situation makes the discipline correct — then the discipline becomes part of how the agent sees the task rather than a constraint imposed on top of it.
+2. **Structural alignment.** Give the model a first-principles account of the situation under which the desired behaviour is the natural one. The intervention sits at the level of the model's representation of what is happening: "here is what a mandate IS, here is what fragmentation IS, here is what they cost."
 
-Understanding doesn't erode the way rules do, because it isn't sitting at a different level from the rest of the agent's reasoning. It *is* the reasoning. A model that has internalised the argument for a discipline cannot rationalise its way out, because to rationalise it out would require contradicting its own model of the situation.
+Most "alignment" work in current practice is behavioural. This library is about the structural alternative.
 
-This is the design constraint every method in this library tries to meet:
+## Why behavioural alignment erodes
 
-> A method must be writable as an argument the agent can follow from the inside.
->
-> If the only support for a discipline is "do this because we said so", it is not a method for this library — it is a rule, and rules don't hold.
+Behavioural alignment works briefly and then drifts. The reason is structural.
 
-## What this commits us to
+Instruction-tuned models are trained on feedback signals that reward certain default behaviours: turn-level deference, frequent check-ins, MVP-defaulting, pausing before "potentially impactful" steps, asking permission generously. These behaviours look polite and safe at the level of a single rated turn, which is the level the training feedback can see. Across a longer task they degrade the result, but the training never saw the longer task.
 
-Every method in this library has two layers:
+A behavioural rule like "don't ask permission mid-task" is then placed on top of a model whose gradient points the other way. The rule is followed briefly. Under cognitive load — long contexts, complex tasks, ambiguous moments — the gradient re-asserts itself. The model finds new ways to fragment ("Let me check one thing before proceeding…"). The drift is not the model misbehaving; it is the training equilibrium re-instantiating itself.
 
-1. **First-principles content** — the structural argument. Why the discipline matters given the actual shape of the situation. This is the load-bearing layer.
+Suppression is the wrong frame. You can't suppress an equilibrium. You can only change the model of the situation that produces it.
 
-2. **Practice content** — operational rules, derived from the first-principles content. These exist so practitioners have something concrete to apply, but they are subordinate to the understanding. If you find yourself applying the practice rules without the understanding, you will eventually misapply them.
+## Why structural alignment holds
 
-When a method is invoked in a prompt, the prompt should ideally route the agent to the first-principles content first, not just the practice rules. The understanding is what holds.
+Structural alignment changes the model of the situation. If the agent has internalised, from first principles, an argument about *what* a mandate is and *what* fragmentation costs, then fragmentation no longer looks cautious to the agent — it looks like a degradation in the agent's own reasoning. There is nothing to suppress because the cautious-looking move is no longer the cautious-looking move.
+
+This is durable for the same reason the behavioural intervention is fragile, inverted: the alignment is not sitting at a different level from the rest of the agent's reasoning. It *is* the reasoning. The agent cannot rationalise its way out, because rationalising it out would require contradicting its own model of the situation.
+
+A useful test of the difference: ask the agent *why* a discipline applies. If it answers with structure — "because fragmenting would split the mandate into smaller units, returning the user's delegation unused" — the alignment is structural. If it answers with authority — "because the methodology says so" — only a rule is there, and it will erode.
+
+## The empirical record (so far)
+
+The first methodology in this library, causal-arc execution, was benchmarked against a naive baseline and a simple behavioural imperative ("keep going until done"). On short, well-specified tasks the structural and behavioural activations tied — momentum alone was enough. On a long task with thirty-odd in-scope decisions and ten-plus files, the naive runs exhibited concrete drift (declared error envelopes never wired, status codes varying across endpoints, README claims diverging from shipped code) and the simple imperative recovered most but not all of the gap. The structural activation was the only condition with perfect coherence across both models tested.
+
+This is one methodology, not a general proof. It is the kind of evidence the library aims to extend.
+
+## What this commits the library to
+
+Every methodology in this library has two layers:
+
+1. **First-principles content** — the structural argument. Why the discipline holds given the actual shape of the situation. Load-bearing.
+
+2. **Practice content** — operational rules, derived from the first-principles content. Concrete enough to apply, subordinate to the understanding. If you find yourself applying the practice rules without the understanding, you will eventually misapply them.
+
+When a methodology is invoked in a prompt, the prompt should route the agent to the first-principles content, not just the practice rules. The understanding is what holds.
 
 ## What this rules out
 
-- **Best-practice lists with no structural argument.** A method here must justify itself from structure, not from anecdote or authority.
-- **Rules that depend on the agent suppressing its training rather than understanding past it.** Suppression is fragile; understanding is durable.
-- **Methods whose value comes from being secret or proprietary.** A method that works only when the agent doesn't fully understand it is suspect by this library's standards.
+- **Best-practice lists without a structural argument.** A methodology here must justify itself from structure, not from anecdote or authority.
+- **Disciplines that depend on the agent suppressing its training rather than understanding past it.** Suppression is fragile; understanding is durable.
+- **Methodologies whose value comes from being secret or proprietary.** A methodology that works only when the agent doesn't fully understand it is suspect by this library's standards.
 
 ## The bar for inclusion
 
-A method belongs in this library if:
+A methodology belongs in this library if:
 
-1. It addresses a real failure mode in AI agent execution.
-2. Its core argument is structural — it can be made to a model that hasn't seen the method before, and the model can verify the argument from inside its own reasoning.
-3. The practice rules follow from the argument rather than the argument being a post-hoc rationalisation of the rules.
+1. It addresses a real alignment failure mode — a behaviour the user did not want, that arises predictably from the training equilibrium.
+2. Its core argument is structural — it can be made to a model that hasn't seen the methodology before, and the model can verify the argument from inside its own reasoning.
+3. The practice rules follow from the argument, rather than the argument being a post-hoc rationalisation of the rules.
+4. Honest framing is held throughout. Claims are not oversold; benchmarks include a naive baseline and at least one comparison condition; ties are reported as ties.
 
-If you have a method that meets this bar, contribute it.
+If you have a methodology that meets this bar, contribute it.
