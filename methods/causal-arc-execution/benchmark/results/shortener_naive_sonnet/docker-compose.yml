@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - shortener_data:/data
+    environment:
+      - DB_PATH=/data/shortener.db
+    restart: unless-stopped
+
+volumes:
+  shortener_data:

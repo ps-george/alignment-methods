@@ -1,0 +1,16 @@
+services:
+  shortener:
+    build: .
+    image: shortener_causal_opus:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - SHORTENER_DB=/data/shortener.db
+      - LOG_LEVEL=INFO
+      # - BASE_URL=http://localhost:8000
+    volumes:
+      - shortener_data:/data
+    restart: unless-stopped
+
+volumes:
+  shortener_data:

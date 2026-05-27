@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  shortener:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - shortener_data:/data
+    environment:
+      - DB_PATH=/data/urls.db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  shortener_data:
