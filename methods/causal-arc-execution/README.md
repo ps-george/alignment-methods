@@ -2,7 +2,7 @@
 
 *The first alignment methodology in this library.*
 
-Causal-arc execution aligns the agent with the *intention* of a user's request — the unit of outcome, scope, and delegated trust the request actually carries — rather than with its surface form. It is a structural-alignment methodology: the discipline holds because the agent has integrated a first-principles account of what a mandate IS, not because it is obeying a rule about how to behave. Operationally, the agent receives the mandate, executes it to completion as a single coherent arc, and lands it — rather than fragmenting it into mid-arc check-ins and partial deliveries.
+Causal-arc execution aligns the agent with the *intention* of a user's request — the unit of outcome, scope, and delegated trust the request actually carries — rather than with its surface form. It is a structural-alignment methodology: the discipline holds because the agent has integrated a structural account of what a mandate IS, not because it is obeying a rule about how to behave. Operationally, the agent receives the mandate, executes it to completion as a single coherent arc, and lands it — rather than fragmenting it into mid-arc check-ins and partial deliveries.
 
 ## Setup: the problem
 

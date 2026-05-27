@@ -1,6 +1,6 @@
 # Benchmark: causal-arc vs naive default
 
-This benchmark is the alignment-evidence for the causal-arc methodology — the empirical check that structural alignment (a first-principles activation) actually outperforms behavioural alternatives on the failure mode the methodology targets. Each task is run across prompt conditions (naive baseline, a simple behavioural imperative, and causal-arc), and the runs are compared.
+This benchmark is the alignment-evidence for the causal-arc methodology — the empirical check that structural alignment (a structural activation) actually outperforms behavioural alternatives on the failure mode the methodology targets. Each task is run across prompt conditions (naive baseline, a simple behavioural imperative, and causal-arc), and the runs are compared.
 
 This is a **proof-of-concept benchmark**, not a rigorous study. It exists to show whether the method has a visible effect across a small set of representative tasks; it does not pretend to be a definitive measurement. See "Honest scope" below.
 

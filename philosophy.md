@@ -10,7 +10,7 @@ There are, roughly, two ways to align a model toward a desired behaviour:
 
 1. **Behavioural alignment.** Tell the model what to do. System prompts, instruction tuning, RLHF preference shaping, rule lists, constitutions framed as commands. The intervention sits at the level of behaviour: "produce outputs like this, not like that."
 
-2. **Structural alignment.** Give the model a first-principles account of the situation under which the desired behaviour is the natural one. The intervention sits at the level of the model's representation of what is happening: "here is what a mandate IS, here is what fragmentation IS, here is what they cost."
+2. **Structural alignment.** Give the model a structural account of the situation under which the desired behaviour is the natural one. The intervention sits at the level of the model's representation of what is happening: "here is what a mandate IS, here is what fragmentation IS, here is what they cost."
 
 Most "alignment" work in current practice is behavioural. This library is about the structural alternative.
 
@@ -42,11 +42,11 @@ This is one methodology, not a general proof. It is the kind of evidence the lib
 
 Every methodology in this library has two layers:
 
-1. **First-principles content** — the structural argument. Why the discipline holds given the actual shape of the situation. Load-bearing.
+1. **Structural content** — the structural argument. Why the discipline holds given the actual shape of the situation. Load-bearing.
 
-2. **Practice content** — operational rules, derived from the first-principles content. Concrete enough to apply, subordinate to the understanding. If you find yourself applying the practice rules without the understanding, you will eventually misapply them.
+2. **Practice content** — operational rules, derived from the structural content. Concrete enough to apply, subordinate to the understanding. If you find yourself applying the practice rules without the understanding, you will eventually misapply them.
 
-When a methodology is invoked in a prompt, the prompt should route the agent to the first-principles content, not just the practice rules. The understanding is what holds.
+When a methodology is invoked in a prompt, the prompt should route the agent to the structural content, not just the practice rules. The understanding is what holds.
 
 ## What this rules out
 

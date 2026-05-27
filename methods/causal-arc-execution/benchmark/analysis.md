@@ -8,7 +8,7 @@ Findings from two benchmark phases (2026-05-26): 12 short-task cells + 6 long-ta
 
 **On the long task (URL shortener, 10+ files, ~30+ in-scope decisions): causal-arc wins on design coherence specifically — the dimension the methodology was designed to address.**
 
-The "first-principles framing → better unsupervised direction" hypothesis is supported by the long-task results.
+The "structural framing → better unsupervised direction" hypothesis is supported by the long-task results.
 
 ## Phase 1: short tasks (12 cells)
 
@@ -35,7 +35,7 @@ The "first-principles framing → better unsupervised direction" hypothesis is s
 | Causal-arc | 4.5 | +0.25 |
 | Keep-going | 4.5 | +0.25 |
 
-**Tied.** First-principles framing did not outperform a simple imperative on short tasks at this model strength.
+**Tied.** Structural framing did not outperform a simple imperative on short tasks at this model strength.
 
 ### The Sonnet + CLI cell
 
@@ -90,7 +90,7 @@ Causal-arc cells were the only condition with perfect 5/5 coherence in BOTH mode
 
 ## The hypothesis tested
 
-**Claim**: first-principles framing → better unsupervised direction → better design coherence on long tasks.
+**Claim**: structural framing → better unsupervised direction → better design coherence on long tasks.
 
 **Result**: supported. Long-task coherence scores: naive 3.5, keep-going 4.5, causal-arc 5.0.
 
@@ -101,7 +101,7 @@ Causal-arc cells were the only condition with perfect 5/5 coherence in BOTH mode
 | Task shape | Recommended prompt | Why |
 |------------|-------------------|-----|
 | Short, well-specified | Naive or keep-going | Models are well-trained for completeness; depth doesn't differentiate |
-| Long, multi-file | **Causal-arc** | Design coherence over many decisions is what differentiates; first-principles framing actively maintains it |
+| Long, multi-file | **Causal-arc** | Design coherence over many decisions is what differentiates; structural framing actively maintains it |
 | Code | Either intervention | Both lift baseline; specific cells vary by model |
 | Prose | Naive or keep-going | Causal-arc's "honest landing" leaks into deliverable polish |
 | Decision-heavy | **Causal-arc** | The methodology actively guides design decisions, not just continuation |

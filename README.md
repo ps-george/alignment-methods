@@ -1,8 +1,10 @@
 # alignment-methods
 
-A library of alignment methodologies that work by giving AI agents **first-principles understanding** rather than surface-level rules.
+> **Alignment through comprehension, not compliance.**
 
-Most "alignment" interventions tell the agent what to do — system prompts, behavioural rules, RLHF preference shaping. These erode under training pressure: the prohibition sits on top of a gradient that points the other way, and the gradient eventually wins. What holds is **structural alignment**: giving the agent a first-principles account of *what* a thing is, such that the agent has integrated the claim rather than memorised a rule. A model that has integrated the claim applies it in novel cases too, because the discipline now lives in its model of the situation.
+A library of alignment methodologies that work by giving AI agents **structural understanding** rather than surface-level rules.
+
+Most "alignment" interventions tell the agent what to do — system prompts, behavioural rules, RLHF preference shaping. These erode under training pressure: the prohibition sits on top of a gradient that points the other way, and the gradient eventually wins. What holds is **structural alignment**: giving the agent a structural account of *what* a thing is, such that the agent has integrated the claim rather than memorised a rule. A model that has integrated the claim applies it in novel cases too, because the discipline now lives in its model of the situation.
 
 This library collects methodologies that meet that bar.
 
@@ -24,7 +26,7 @@ The first methodology in this library — *causal-arc execution* — has been be
 
 On short tasks, the methodology ties with the simple imperative — momentum alone suffices. On the long task, where naive runs exhibited concrete drift (error envelopes declared and never wired, status-code inconsistencies, README claims unsupported by code), causal-arc was the only condition with perfect coherence in both models. Full audit trail in [`methods/causal-arc-execution/benchmark/`](methods/causal-arc-execution/benchmark/).
 
-The result is the alignment claim in miniature: a fifty-token first-principles activation maintained coherence where surface imperatives could not.
+The result is the alignment claim in miniature: a fifty-token structural activation maintained coherence where surface imperatives could not.
 
 ## Current methodologies
 

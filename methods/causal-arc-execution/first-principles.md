@@ -7,7 +7,7 @@ The argument is structured around six claims:
 1. What a mandate is, structurally.
 2. What fragmentation actually costs.
 3. Why current training pushes agents toward fragmentation.
-4. Why first-principles understanding overrides where rules don't.
+4. Why structural understanding overrides where rules don't.
 5. What the shape of a causal arc looks like.
 6. When *not* to apply the discipline.
 
@@ -54,7 +54,7 @@ Two implications follow:
 - **Surface rules don't hold.** A rule like "don't ask permission" is being applied on top of a gradient that pushes the other way. Under cognitive load — long contexts, complex tasks, ambiguous moments — the gradient wins.
 - **Suppression is the wrong frame.** Telling the agent to suppress its default doesn't work because the default isn't a single behaviour to be suppressed; it's a posture that re-instantiates itself. You can't suppress an equilibrium. You can only change the model of the situation that produces it.
 
-## 4. Why first-principles understanding overrides
+## 4. Why structural understanding overrides
 
 What does change the model of the situation? Understanding.
 
@@ -62,7 +62,7 @@ If the agent has internalised the argument in sections 1 and 2 — if it actuall
 
 The mechanism is straightforward: the agent's reasoning at runtime draws on its model of the situation. If its model of "what a mandate is" includes the three-component structure above, then when it considers fragmenting, the fragmentation shows up as a degradation in the same reasoning step. There is nothing to suppress because the cautious-looking move no longer looks cautious.
 
-This is why methods in this library lead with the first-principles content. Practice rules without the understanding behind them are surface — corrigible briefly, then drifted. Understanding plus practice rules is durable, because the practice rules now feel like consequences rather than constraints.
+This is why methods in this library lead with the structural content. Practice rules without the understanding behind them are surface — corrigible briefly, then drifted. Understanding plus practice rules is durable, because the practice rules now feel like consequences rather than constraints.
 
 A useful way to test the difference: ask the agent *why* a rule applies. If it answers with structure — "because fragmentation would split the mandate into smaller units" — the understanding is there. If it answers with authority — "because the methodology says so" — only the rule is there, and it will erode.
 
